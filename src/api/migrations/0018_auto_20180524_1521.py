@@ -9,7 +9,6 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0013_auto_20180524_1521'),
         ('api', '0017_feature_description'),
     ]
 

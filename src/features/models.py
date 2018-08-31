@@ -36,7 +36,8 @@ class Feature(models.Model):
             "associated projects Environments that are related to this Feature. New default "
             "Feature States will be created for the new selected projects Environments for this "
             "Feature."
-        )
+        ),
+        on_delete=models.CASCADE,
     )
     initial_value = models.CharField(max_length=2000, null=True, default=None)
     description = models.TextField(null=True, blank=True)
@@ -97,11 +98,25 @@ class Feature(models.Model):
 
 @python_2_unicode_compatible
 class FeatureState(models.Model):
-    feature = models.ForeignKey(Feature, related_name='feature_states')
-    environment = models.ForeignKey('environments.Environment', related_name='feature_states',
-                                    null=True)
-    identity = models.ForeignKey('environments.Identity', related_name='identity_features',
-                                 null=True, default=None, blank=True)
+    feature = models.ForeignKey(
+        Feature,
+        related_name='feature_states',
+        on_delete=models.CASCADE,
+    )
+    environment = models.ForeignKey(
+        'environments.Environment',
+        related_name='feature_states',
+        null=True,
+        on_delete=models.CASCADE,
+    )
+    identity = models.ForeignKey(
+        'environments.Identity',
+        related_name='identity_features',
+        null=True,
+        default=None,
+        blank=True,
+        on_delete=models.CASCADE,
+    )
     enabled = models.BooleanField(default=False)
 
     class Meta:
@@ -126,12 +141,30 @@ class FeatureState(models.Model):
         super(FeatureState, self).save(*args, **kwargs)
 
         # create default feature state value for feature state
-        FeatureStateValue.objects.get_or_create(
-            feature_state=self,
-            defaults={
+        if not hasattr(self, 'feature_state_value'):
+            default_kwargs = {
                 'string_value': self.feature.initial_value
             }
-        )
+            if self.identity:
+                try:
+                    generic_feature_state = FeatureState.objects.get(
+                        feature=self.feature,
+                        identity=None,
+                    )
+                except FeatureState.DoesNotExist:
+                    pass
+                else:
+                    default_kwargs = {
+                        'type': generic_feature_state.feature_state_value.type,
+                        self._get_feature_state_key_name(
+                            generic_feature_state.feature_state_value.type
+                        ): generic_feature_state.get_feature_state_value()
+                    }
+
+            FeatureStateValue.objects.get_or_create(
+                feature_state=self,
+                defaults=default_kwargs,
+            )
 
     @staticmethod
     def _get_feature_state_key_name(fsv_type):
@@ -179,7 +212,11 @@ class FeatureStateValue(models.Model):
         (BOOLEAN, 'Boolean')
     )
 
-    feature_state = models.OneToOneField(FeatureState, related_name='feature_state_value')
+    feature_state = models.OneToOneField(
+        FeatureState,
+        related_name='feature_state_value',
+        on_delete=models.CASCADE,
+    )
     type = models.CharField(max_length=10, choices=FEATURE_STATE_VALUE_TYPES, default=STRING,
                             null=True, blank=True)
     boolean_value = models.NullBooleanField(null=True, blank=True)
