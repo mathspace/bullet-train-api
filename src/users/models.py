@@ -5,9 +5,9 @@ from django.core.mail import EmailMultiAlternatives
 from django.db import models
 from django.template.loader import get_template
 
-from app.utils import create_hash
+from ..app.utils import create_hash
 from django.utils.encoding import python_2_unicode_compatible
-from organisations.models import Organisation
+from ..organisations.models import Organisation
 
 
 class UserManager(BaseUserManager):

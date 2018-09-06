@@ -6,9 +6,9 @@ from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
-from projects.serializers import ProjectSerializer
-from organisations.serializers import OrganisationSerializer
-from users.serializers import UserFullSerializer, InviteSerializer
+from ..projects.serializers import ProjectSerializer
+from ..organisations.serializers import OrganisationSerializer
+from ..users.serializers import UserFullSerializer, InviteSerializer
 
 
 class OrganisationViewSet(viewsets.ModelViewSet):

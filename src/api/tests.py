@@ -2,14 +2,14 @@ from django.test import TestCase
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient
 
-from environments.models import Environment, Identity
-from features.models import Feature, FeatureState
-from projects.models import Project
-from organisations.models import Organisation
+from ..environments.models import Environment, Identity
+from ..features.models import Feature, FeatureState
+from ..projects.models import Project
+from ..organisations.models import Organisation
 
 from rest_framework import status
 
-from users.models import FFAdminUser, Invite
+from ..users.models import FFAdminUser, Invite
 
 
 class OrganisationTestCase(TestCase):

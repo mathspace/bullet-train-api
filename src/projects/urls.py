@@ -1,7 +1,7 @@
 from django.conf.urls import url, include
 from rest_framework_nested import routers
 
-from features.views import FeatureViewSet
+from ..features.views import FeatureViewSet
 from . import views
 
 

@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
-from features.serializers import FeatureStateSerializerFull
-from environments.models import Environment, Identity
-from projects.serializers import ProjectSerializer
+from ..features.serializers import FeatureStateSerializerFull
+from ..environments.models import Environment, Identity
+from ..projects.serializers import ProjectSerializer
 
 
 class EnvironmentSerializerFull(serializers.ModelSerializer):

@@ -6,30 +6,14 @@ with open('readme.md') as readme_file:
 
 
 setuptools.setup(
-    name='BulletTrainAPI',
+    name='bullet-train-api',
     version='1.1.0',
     description='Python REST API for Bullet-Train. Ship features with confidence using feature '
                 'flags and remote config. Host yourself or use our hosted version at '
                 'https://bullet-train.io/ https://bullet-train.io/',
     long_description=readme,
-    package_dir={"": "src/"},
-    packages=[
-        'api',
-        'api.migrations',
-        'app',
-        'docs',
-        'docs.migrations',
-        'users',
-        'users.migrations',
-        'features',
-        'features.migrations',
-        'projects',
-        'projects.migrations',
-        'environments',
-        'environments.migrations',
-        'organisations',
-        'organisations.migrations',
-    ],
+    package_dir={"": "pip_src/"},
+    packages=setuptools.find_packages(where="pip_src"),
     classifiers=[
         'Development Status :: 1',
         'Intended Audience :: Developers',

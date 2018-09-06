@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 
-import app
+from ...app import utils
 
 
 class Migration(migrations.Migration):
@@ -17,6 +17,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='environment',
             name='api_key',
-            field=models.CharField(default=app.utils.create_hash, max_length=100, unique=True),
+            field=models.CharField(default=utils.create_hash, max_length=100, unique=True),
         ),
     ]

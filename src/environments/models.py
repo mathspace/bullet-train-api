@@ -4,10 +4,10 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from app.utils import create_hash
+from ..app.utils import create_hash
 from django.utils.encoding import python_2_unicode_compatible
-from features.models import FeatureState
-from projects.models import Project
+from ..features.models import FeatureState
+from ..projects.models import Project
 
 
 @python_2_unicode_compatible

@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 
-from features.views import SDKFeatureStates
+from ..features.views import SDKFeatureStates
 
 urlpatterns = [
     url(r'^v1/', include([

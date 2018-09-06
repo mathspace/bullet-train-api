@@ -1,9 +1,9 @@
 from django.test import TestCase
 
-from environments.models import Environment
+from ..environments.models import Environment
 from .models import Feature, FeatureState
-from organisations.models import Organisation
-from projects.models import Project
+from ..organisations.models import Organisation
+from ..projects.models import Project
 
 
 class FeatureTestCase(TestCase):

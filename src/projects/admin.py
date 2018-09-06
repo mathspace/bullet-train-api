@@ -3,9 +3,9 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from environments.models import Environment
-from features.models import Feature
-from projects.models import Project
+from ..environments.models import Environment
+from ..features.models import Feature
+from ..projects.models import Project
 
 
 class EnvironmentInline(admin.StackedInline):
