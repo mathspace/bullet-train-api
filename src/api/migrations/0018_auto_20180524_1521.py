@@ -5,12 +5,21 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 import django.db.models.deletion
 
+try:
+    from users import apps
+    _dependencies = [
+        ('users', '0013_auto_20180524_1521'),
+        ('api', '0017_feature_description'),
+    ]
+except ModuleNotFoundError:
+    _dependencies = [
+        ('api', '0017_feature_description'),
+    ]
+
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('api', '0017_feature_description'),
-    ]
+    dependencies = _dependencies
 
     operations = [
         migrations.AlterField(

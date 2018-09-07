@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from rest_framework import viewsets, status
+from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from ..environments.serializers import EnvironmentSerializerLight
-from ..projects.models import Project
-from ..projects.serializers import ProjectSerializer
+try:
+    from environments.serializers import EnvironmentSerializerLight
+except ModuleNotFoundError:
+    from bullet_train_api.environments.serializers import EnvironmentSerializerLight
+from .models import Project
+from .serializers import ProjectSerializer
 
 
 class ProjectViewSet(viewsets.ModelViewSet):

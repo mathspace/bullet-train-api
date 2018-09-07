@@ -4,10 +4,15 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from ..app.utils import create_hash
 from django.utils.encoding import python_2_unicode_compatible
-from ..features.models import FeatureState
-from ..projects.models import Project
+try:
+    from app.utils import create_hash
+    from features.models import FeatureState
+    from projects.models import Project
+except ModuleNotFoundError:
+    from bullet_train_api.app.utils import create_hash
+    from bullet_train_api.features.models import FeatureState
+    from bullet_train_api.projects.models import Project
 
 
 @python_2_unicode_compatible
@@ -28,6 +33,7 @@ class Environment(models.Model):
     api_key = models.CharField(default=create_hash, unique=True, max_length=100)
 
     class Meta:
+        unique_together = ("name", "project")
         ordering = ['id']
 
     def save(self, *args, **kwargs):
@@ -72,6 +78,7 @@ class Identity(models.Model):
     )
 
     class Meta:
+        unique_together = ("identifier", "environment")
         verbose_name_plural = "Identities"
         ordering = ['id']
 

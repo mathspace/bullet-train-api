@@ -5,8 +5,12 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.schemas import AutoSchema
 
-from ..environments.models import Environment, Identity
-from ..projects.models import Project
+try:
+    from environments.models import Environment, Identity
+    from projects.models import Project
+except ModuleNotFoundError:
+    from bullet_train_api.environments.models import Environment, Identity
+    from bullet_train_api.projects.models import Project
 from .models import FeatureState, Feature
 from .serializers import FeatureStateSerializerBasic, FeatureStateSerializerFull, \
     FeatureStateSerializerCreate, CreateFeatureSerializer, FeatureSerializer, \

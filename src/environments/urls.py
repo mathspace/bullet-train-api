@@ -1,7 +1,11 @@
 from django.conf.urls import url, include
 from rest_framework_nested import routers
 
-from ..features.views import FeatureStateViewSet
+try:
+    from features.views import FeatureStateViewSet
+except ModuleNotFoundError:
+    from bullet_train_api.features.views import FeatureStateViewSet
+
 from .views import IdentityViewSet, EnvironmentViewSet
 
 router = routers.DefaultRouter()

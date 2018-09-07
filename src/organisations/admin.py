@@ -3,8 +3,11 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from ..projects.models import Project
-from ..organisations.models import Organisation
+try:
+    from projects.models import Project
+except ModuleNotFoundError:
+    from bullet_train_api.projects.models import Project
+from .models import Organisation
 
 
 class ProjectInline(admin.StackedInline):

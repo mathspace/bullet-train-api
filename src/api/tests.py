@@ -2,14 +2,20 @@ from django.test import TestCase
 from rest_framework.authtoken.models import Token
 from rest_framework.test import APIClient
 
-from ..environments.models import Environment, Identity
-from ..features.models import Feature, FeatureState
-from ..projects.models import Project
-from ..organisations.models import Organisation
+try:
+    from environments.models import Environment, Identity
+    from features.models import Feature, FeatureState
+    from projects.models import Project
+    from organisations.models import Organisation
+    from users.models import FFAdminUser, Invite
+except ModuleNotFoundError:
+    from bullet_train_api.environments.models import Environment, Identity
+    from bullet_train_api.features.models import Feature, FeatureState
+    from bullet_train_api.projects.models import Project
+    from bullet_train_api.organisations.models import Organisation
+    from bullet_train_api.users.models import FFAdminUser, Invite
 
 from rest_framework import status
-
-from ..users.models import FFAdminUser, Invite
 
 
 class OrganisationTestCase(TestCase):
@@ -326,8 +332,7 @@ class ProjectFeatureTestCase(TestCase):
         # Given
         client = self.set_up()
         organisation = Organisation.objects.get(name="test org")
-        project = Project(name="test project", organisation=organisation)
-        project.save()
+        project = Project.objects.get(name="test project", organisation=organisation)
         environment_1 = Environment(name="env 1", project=project)
         environment_2 = Environment(name="env 2", project=project)
         environment_3 = Environment(name="env 3", project=project)

@@ -4,7 +4,10 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 
-from ...app import utils
+try:
+    from app import utils
+except ModuleNotFoundError:
+    from bullet_train_api.app import utils
 
 
 class Migration(migrations.Migration):

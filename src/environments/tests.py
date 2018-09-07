@@ -1,9 +1,14 @@
 from django.test import TestCase
 
 from .models import Environment, Identity
-from ..features.models import Feature, FeatureState
-from ..organisations.models import Organisation
-from ..projects.models import Project
+try:
+    from features.models import Feature, FeatureState
+    from organisations.models import Organisation
+    from projects.models import Project
+except ModuleNotFoundError:
+    from bullet_train_api.features.models import Feature, FeatureState
+    from bullet_train_api.organisations.models import Organisation
+    from bullet_train_api.projects.models import Project
 
 
 class EnvironmentTestCase(TestCase):

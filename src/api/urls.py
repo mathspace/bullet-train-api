@@ -1,6 +1,9 @@
 from django.conf.urls import url, include
 
-from ..features.views import SDKFeatureStates
+try:
+    from features.views import SDKFeatureStates
+except ModuleNotFoundError:
+    from bullet_train_api.features.views import SDKFeatureStates
 
 urlpatterns = [
     url(r'^v1/', include([

@@ -1,8 +1,13 @@
 from rest_framework import serializers
 
-from ..features.serializers import FeatureStateSerializerFull
-from ..environments.models import Environment, Identity
-from ..projects.serializers import ProjectSerializer
+try:
+    from features.serializers import FeatureStateSerializerFull
+    from environments.models import Environment, Identity
+    from projects.serializers import ProjectSerializer
+except ModuleNotFoundError:
+    from bullet_train_api.features.serializers import FeatureStateSerializerFull
+    from bullet_train_api.environments.models import Environment, Identity
+    from bullet_train_api.projects.serializers import ProjectSerializer
 
 
 class EnvironmentSerializerFull(serializers.ModelSerializer):

@@ -3,9 +3,13 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from ..environments.models import Environment
-from ..features.models import Feature
-from ..projects.models import Project
+try:
+    from environments.models import Environment
+    from features.models import Feature
+except ModuleNotFoundError:
+    from bullet_train_api.environments.models import Environment
+    from bullet_train_api.features.models import Feature
+from .models import Project
 
 
 class EnvironmentInline(admin.StackedInline):

@@ -1,7 +1,10 @@
 from django.conf.urls import url, include
 from rest_framework_nested import routers
 
-from ..features.views import FeatureViewSet
+try:
+    from features.views import FeatureViewSet
+except ModuleNotFoundError:
+    from bullet_train_api.features.views import FeatureViewSet
 from . import views
 
 

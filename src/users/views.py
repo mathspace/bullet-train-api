@@ -8,9 +8,9 @@ from rest_framework.decorators import list_route
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from ..organisations.serializers import OrganisationSerializer
-from ..users import serializers
-from ..users.models import FFAdminUser, Invite
+from organisations.serializers import OrganisationSerializer
+from . import serializers
+from .models import FFAdminUser, Invite
 
 
 class AdminInitView(View):

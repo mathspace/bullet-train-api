@@ -6,9 +6,13 @@ from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
-from ..projects.serializers import ProjectSerializer
-from ..organisations.serializers import OrganisationSerializer
-from ..users.serializers import UserFullSerializer, InviteSerializer
+try:
+    from projects.serializers import ProjectSerializer
+    from users.serializers import UserFullSerializer, InviteSerializer
+except ModuleNotFoundError:
+    from bullet_train_api.projects.serializers import ProjectSerializer
+    from bullet_train_api.users.serializers import UserFullSerializer, InviteSerializer
+from .serializers import OrganisationSerializer
 
 
 class OrganisationViewSet(viewsets.ModelViewSet):
