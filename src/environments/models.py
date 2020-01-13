@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from django.utils.encoding import python_2_unicode_compatible
 try:
     from app.utils import create_hash
     from features.models import FeatureState
@@ -15,7 +14,6 @@ except ModuleNotFoundError:
     from bullet_train_api.projects.models import Project
 
 
-@python_2_unicode_compatible
 class Environment(models.Model):
     name = models.CharField(max_length=2000)
     created_date = models.DateTimeField('DateCreated', auto_now_add=True)
@@ -67,7 +65,6 @@ class Environment(models.Model):
         return "Project %s - Environment %s" % (self.project.name, self.name)
 
 
-@python_2_unicode_compatible
 class Identity(models.Model):
     identifier = models.CharField(max_length=2000)
     created_date = models.DateTimeField('DateCreated', auto_now_add=True)

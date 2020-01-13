@@ -4,7 +4,6 @@ from django.contrib.auth.models import AbstractUser
 from django.core.mail import EmailMultiAlternatives
 from django.db import models
 from django.template.loader import get_template
-from django.utils.encoding import python_2_unicode_compatible
 
 from app.utils import create_hash
 from organisations.models import Organisation
@@ -44,7 +43,6 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 
-@python_2_unicode_compatible
 class FFAdminUser(AbstractUser):
     organisations = models.ManyToManyField(Organisation, related_name="users", blank=True)
     email = models.EmailField(unique=True, null=False)
@@ -92,7 +90,6 @@ class FFAdminUser(AbstractUser):
         return "%s %s" % (self.first_name, self.last_name)
 
 
-@python_2_unicode_compatible
 class Invite(models.Model):
     email = models.EmailField()
     hash = models.CharField(max_length=100, default=create_hash, unique=True)
