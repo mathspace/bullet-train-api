@@ -219,6 +219,6 @@ class FeatureStateValue(models.Model):
     )
     type = models.CharField(max_length=10, choices=FEATURE_STATE_VALUE_TYPES, default=STRING,
                             null=True, blank=True)
-    boolean_value = models.NullBooleanField(null=True, blank=True)
+    boolean_value = models.BooleanField(null=True, blank=True)
     integer_value = models.IntegerField(null=True, blank=True)
     string_value = models.CharField(null=True, max_length=2000, blank=True)
