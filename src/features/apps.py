@@ -5,4 +5,4 @@ from django.apps import AppConfig
 
 
 class FeaturesConfig(AppConfig):
-    name = 'features'
+    name = 'bullet_train_api.features'

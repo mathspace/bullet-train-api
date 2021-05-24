@@ -5,4 +5,4 @@ from django.apps import AppConfig
 
 
 class ProjectsConfig(AppConfig):
-    name = 'projects'
+    name = 'bullet_train_api.projects'

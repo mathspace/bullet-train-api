@@ -4,4 +4,4 @@ from django.apps import AppConfig
 
 
 class ApiConfig(AppConfig):
-    name = 'api'
+    name = 'bullet_train_api.api'
