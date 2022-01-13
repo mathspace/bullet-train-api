@@ -3,7 +3,7 @@ from allauth.account.utils import setup_user_email
 from rest_auth.registration.serializers import RegisterSerializer
 
 from rest_framework import serializers
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from organisations.serializers import OrganisationSerializer
 from .models import FFAdminUser, Invite
